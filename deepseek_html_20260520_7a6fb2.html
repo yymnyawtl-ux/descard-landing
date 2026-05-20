@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesCard — Нанимаем дизайнеров для карточек товаров на маркетплейсы</title>
+    <style>
+        :root {
+            --accent: #0f6e4a;
+            --accent-hover: #0a5a3c;
+            --accent-light: #e9f5f0;
+            --accent-border: #c3e3d4;
+            --white: #ffffff;
+            --bg-light: #f9fbfa;
+            --bg-gray: #f3f6f5;
+            --text-primary: #1a1f1c;
+            --text-secondary: #4a5550;
+            --text-muted: #6e7b75;
+            --border: #e2e8e5;
+            --border-light: #f0f4f2;
+            --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.03);
+            --shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 14px 44px rgba(0, 0, 0, 0.08);
+            --radius-sm: 10px;
+            --radius: 14px;
+            --radius-lg: 18px;
+            --max-width: 1140px;
+            --transition: 0.25s ease;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background: var(--white);
+            line-height: 1.6;
+            font-size: 16px;
+            min-width: 320px;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ─── HEADER ─────────────────────────────── */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--border-light);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px;
+            gap: 20px;
+        }
+        .header__logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.4px;
+            white-space: nowrap;
+            text-decoration: none;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .header__logo span {
+            color: #1f5e43;
+            background: var(--accent-light);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+        .header__nav {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 24px;
+            font-size: 0.925rem;
+            font-weight: 500;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            font-family: inherit;
+            letter-spacing: 0.02em;
+            transition: all var(--transition);
+            white-space: nowrap;
+            line-height: 1.3;
+            background: transparent;
+        }
+        .btn--outline {
+            background: transparent;
+            border: 1.5px solid var(--accent-border);
+            color: var(--accent);
+        }
+        .btn--outline:hover {
+            background: var(--accent-light);
+            border-color: var(--accent);
+        }
+        .btn--primary {
+            background: var(--accent);
+            color: var(--white);
+            border: 1.5px solid var(--accent);
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(15, 110, 74, 0.2);
+        }
+        .btn--primary:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+            box-shadow: 0 6px 16px rgba(15, 110, 74, 0.3);
+        }
+        .btn--lg {
+            padding: 14px 30px;
+            font-size: 1rem;
+            border-radius: 40px;
+        }
+        .btn--xl {
+            padding: 16px 36px;
+            font-size: 1.05rem;
+            border-radius: 40px;
+        }
+
+        /* ─── HERO ────────────────────────────────── */
+        .hero {
+            background: linear-gradient(135deg, #f4faf7 0%, #ffffff 100%);
+            padding: 80px 0 84px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .hero__title {
+            font-size: 2.7rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.7px;
+            line-height: 1.2;
+            margin-bottom: 18px;
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero__subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 36px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        .hero__buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ─── SECTIONS ────────────────────────────── */
+        .section {
+            padding: 80px 0;
+        }
+        .section--gray {
+            background: var(--bg-light);
+        }
+        .section__title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.4px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .section__subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            text-align: center;
+            max-width: 620px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        /* ─── DESIGNERS CARDS ────────────────────── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px 30px;
+            box-shadow: var(--shadow);
+            transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+        }
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: var(--accent-border);
+        }
+        .card__number {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            letter-spacing: 0.03em;
+        }
+        .card__title {
+            font-size: 1.15rem;
+            font-weight: 650;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            letter-spacing: -0.2px;
+        }
+        .card__text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .card--example {
+            background: #fcfefd;
+            border: 2px dashed var(--accent-border);
+            box-shadow: none;
+        }
+        .card--example .card__number {
+            background: #fef7e6;
+            color: #8e6100;
+        }
+        .tz-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 20px;
+            margin-top: 16px;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+        .tz-details dt {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .tz-details dd {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+        .tz-details .tz-budget {
+            color: #0f6e4a;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* ─── FORM ────────────────────────────────── */
+        .form-section {
+            background: var(--white);
+            border-top: 1px solid var(--border-light);
+        }
+        .form-wrapper {
+            max-width: 580px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            padding: 40px 36px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.92rem;
+            margin-bottom: 7px;
+            color: var(--text-primary);
+            letter-spacing: -0.1px;
+        }
+        .form-group label .required {
+            color: #c0392b;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 13px 16px;
+            font-size: 0.95rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            transition: border-color var(--transition), box-shadow var(--transition);
+            background: var(--white);
+            color: var(--text-primary);
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(15, 110, 74, 0.08);
+        }
+        .form-group input::placeholder {
+            color: #b0bfb7;
+        }
+        .form-submit {
+            width: 100%;
+            margin-top: 8px;
+            border-radius: 40px;
+            padding: 15px 28px;
+            font-size: 1rem;
+        }
+
+        /* ─── ABOUT ────────────────────────────────── */
+        .about-block {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .about-block p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+        .link-underlined {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            cursor: pointer;
+            font-weight: 550;
+            transition: color var(--transition);
+        }
+        .link-underlined:hover {
+            color: var(--accent-hover);
+        }
+
+        /* ─── FOOTER ──────────────────────────────── */
+        .footer {
+            background: var(--bg-light);
+            border-top: 1px solid var(--border-light);
+            padding: 32px 0;
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+        .footer__links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .footer__links span {
+            cursor: pointer;
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+        .footer__links span:hover {
+            color: var(--accent-hover);
+        }
+
+        /* ─── MODAL ───────────────────────────────── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 36px 32px 28px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .modal__close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            line-height: 1;
+            padding: 4px 10px;
+            border-radius: 8px;
+            transition: color var(--transition), background var(--transition);
+        }
+        .modal__close:hover {
+            color: var(--text-primary);
+            background: var(--bg-gray);
+        }
+        .modal__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+        }
+        .modal ol {
+            padding-left: 22px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .modal ol li {
+            margin-bottom: 12px;
+            padding-left: 4px;
+        }
+        .modal ol li strong {
+            color: var(--text-primary);
+        }
+
+        /* ─── RESPONSIVE ──────────────────────────── */
+        @media (max-width: 900px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .hero__title {
+                font-size: 2.2rem;
+            }
+            .hero__subtitle {
+                font-size: 1.05rem;
+            }
+            .section {
+                padding: 56px 0;
+            }
+            .section__title {
+                font-size: 1.7rem;
+            }
+            .tz-details {
+                grid-template-columns: 1fr;
+            }
+            .form-wrapper {
+                padding: 30px 24px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header .container {
+                height: 60px;
+                gap: 10px;
+            }
+            .header__logo {
+                font-size: 1.2rem;
+            }
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+                border-radius: 25px;
+            }
+            .btn--lg {
+                padding: 12px 24px;
+                font-size: 0.92rem;
+            }
+            .btn--xl {
+                padding: 14px 28px;
+                font-size: 0.98rem;
+            }
+            .hero {
+                padding: 50px 0 56px;
+            }
+            .hero__title {
+                font-size: 1.7rem;
+            }
+            .hero__subtitle {
+                font-size: 0.95rem;
+            }
+            .hero__buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            .hero__buttons .btn {
+                width: 100%;
+                max-width: 320px;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .card {
+                padding: 22px 18px;
+            }
+            .section {
+                padding: 44px 0;
+            }
+            .section__title {
+                font-size: 1.5rem;
+            }
+            .section__subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 32px;
+            }
+            .form-wrapper {
+                padding: 28px 18px;
+            }
+            .tz-details {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .modal {
+                padding: 24px 18px 20px;
+                border-radius: var(--radius);
+            }
+            .modal__title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .header__logo {
+                font-size: 1.05rem;
+            }
+            .btn {
+                padding: 7px 12px;
+                font-size: 0.78rem;
+            }
+            .header .container {
+                gap: 6px;
+                padding: 0 12px;
+            }
+            .container {
+                padding: 0 14px;
+            }
+            .hero__title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── HEADER ──────────────────────────────── -->
+    <header class="header" id="top">
+        <div class="container">
+            <a href="#top" class="header__logo">
+                Des<span>Card</span>
+            </a>
+            <nav class="header__nav">
+                <a href="#designers" class="btn btn--outline">Дизайнерам</a>
+                <a href="#apply" class="btn btn--primary">Стать дизайнером</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ─── HERO ────────────────────────────────── -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero__title">Нанимаем дизайнеров для карточек товаров на маркетплейсы</h1>
+            <p class="hero__subtitle">Регулярные заказы, стабильная оплата, вы только рисуете — всё общение с клиентами на нас</p>
+            <div class="hero__buttons">
+                <a href="#apply" class="btn btn--primary btn--xl">Стать дизайнером</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── ДИЗАЙНЕРАМ ─────────────────────────── -->
+    <section class="section" id="designers">
+        <div class="container">
+            <h2 class="section__title">Дизайнерам</h2>
+            <p class="section__subtitle">Присоединяйтесь к команде профессионалов и получайте регулярные заказы на дизайн карточек товаров</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card__number">01</span>
+                    <h3 class="card__title">Мы — надёжный партнёр</h3>
+                    <p class="card__text">Регулярные заказы от селлеров Wildberries, Ozon и Яндекс Маркета. Прозрачная оплата после сдачи работы. Вы работаете над карточками — мы общаемся с клиентом, собираем правки и согласования.</p>
+                </div>
+                <div class="card">
+                    <span class="card__number">02</span>
+                    <h3 class="card__title">Требования к опыту — только портфолио карточек товаров</h3>
+                    <p class="card__text">Нам не нужны годы работы. Покажи карточки товаров, которые ты уже делал для маркетплейсов — этого достаточно.</p>
+                </div>
+                <div class="card">
+                    <span class="card__number">03</span>
+                    <h3 class="card__title">Честные правила</h3>
+                    <p class="card__text">Приёмка работы по ТЗ. Оплата в течение 3 дней после сдачи. Мы не требуем бесплатных правок сверх ТЗ. Если клиент придумал новое — это отдельная оплата.</p>
+                </div>
+                <div class="card">
+                    <span class="card__number">04</span>
+                    <h3 class="card__title">Отличие от бирж</h3>
+                    <p class="card__text">Никакой комиссии 20%. Ты получаешь полную сумму, оговоренную в ТЗ. Мы не берём процент за посредничество.</p>
+                </div>
+            </div>
+
+            <div class="card card--example" style="margin-top: 0;">
+                <span class="card__number">📋 Пример реального ТЗ</span>
+                <h3 class="card__title">Как выглядит типовое задание</h3>
+                <dl class="tz-details">
+                    <dt>Маркетплейс</dt>
+                    <dd>Ozon</dd>
+                    <dt>Товар</dt>
+                    <dd>Термокружка</dd>
+                    <dt>Что сделать</dt>
+                    <dd>Главное фото на нейтральном фоне, 3 фото с инфографикой (размеры, материал, цвет)</dd>
+                    <dt>Срок</dt>
+                    <dd>24 часа</dd>
+                    <dt>Бюджет</dt>
+                    <dd class="tz-budget">1 200 ₽</dd>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── ФОРМА ЗАЯВКИ ───────────────────────── -->
+    <section class="section form-section" id="apply">
+        <div class="container">
+            <h2 class="section__title">Стать исполнителем</h2>
+            <p class="section__subtitle">Заполните форму, и мы свяжемся с вами в ближайшее время</p>
+            <div class="form-wrapper">
+                <form id="designerForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="portfolio">Ссылка на портфолио <span class="required">*</span></label>
+                        <input type="url" id="portfolio" name="portfolio" placeholder="Ссылка на портфолио с примерами карточек товаров" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Telegram или WhatsApp для связи <span class="required">*</span></label>
+                        <input type="text" id="contact" name="contact" placeholder="@username или номер телефона" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--lg form-submit">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── О КОМПАНИИ ─────────────────────────── -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section__title">О компании</h2>
+            <div class="about-block">
+                <p>Мы — агрегатор дизайнеров для маркетплейсов. Берём на себя поиск клиентов, общение и согласования. Дизайнеры только рисуют.</p>
+                <p>
+                    <span class="link-underlined" id="openOffer">Публичная оферта для дизайнеров</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ──────────────────────────────── -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 — Нанимаем дизайнеров для маркетплейсов</p>
+            <div class="footer__links">
+                <span id="footerPrivacy">Политика конфиденциальности</span>
+                <span id="footerOffer">Оферта для дизайнеров</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ─── MODAL: ОФЕРТА ──────────────────────── -->
+    <div class="modal-overlay" id="offerModalOverlay">
+        <div class="modal" id="offerModal" role="dialog" aria-modal="true" aria-labelledby="offerModalTitle">
+            <button class="modal__close" id="closeOfferModal" aria-label="Закрыть">&times;</button>
+            <h3 class="modal__title" id="offerModalTitle">Публичная оферта для дизайнеров</h3>
+            <ol>
+                <li><strong>Приёмка работы</strong> осуществляется строго по техническому заданию (ТЗ).</li>
+                <li><strong>Оплата</strong> производится в течение 3 рабочих дней после сдачи готовой работы.</li>
+                <li><strong>Без комиссии</strong> — дизайнер получает 100% оговоренной в ТЗ суммы.</li>
+                <li><strong>Бесплатные правки</strong> возможны только в рамках утверждённого ТЗ.</li>
+                <li><strong>Дополнительные требования</strong> клиента сверх ТЗ оплачиваются отдельно.</li>
+                <li><strong>Ответственность за дедлайн</strong> лежит на дизайнере. О срыве сроков необходимо предупреждать заранее.</li>
+                <li><strong>Спорные ситуации</strong> решаются путём переговоров между дизайнером и компанией.</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // ── ФОРМА ЗАЯВКИ ──────────────────────────
+        const form = document.getElementById('designerForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const portfolio = document.getElementById('portfolio').value.trim();
+            const contact = document.getElementById('contact').value.trim();
+
+            if (!portfolio) {
+                alert('Пожалуйста, укажите ссылку на портфолио с примерами карточек товаров.');
+                return;
+            }
+            if (!contact) {
+                alert('Пожалуйста, укажите Telegram или WhatsApp для связи.');
+                return;
+            }
+            alert('Спасибо! Мы свяжемся с вами в течение 24 часов.');
+            form.reset();
+        });
+
+        // ── МОДАЛ: ОФЕРТА ──────────────────────────
+        const offerOverlay = document.getElementById('offerModalOverlay');
+        const offerModal = document.getElementById('offerModal');
+        const openOfferLink = document.getElementById('openOffer');
+        const footerOfferLink = document.getElementById('footerOffer');
+        const closeOfferBtn = document.getElementById('closeOfferModal');
+
+        function openOfferModal() {
+            offerOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOfferModal() {
+            offerOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        openOfferLink.addEventListener('click', openOfferModal);
+        footerOfferLink.addEventListener('click', openOfferModal);
+        closeOfferBtn.addEventListener('click', closeOfferModal);
+        offerOverlay.addEventListener('click', function(e) {
+            if (e.target === offerOverlay) {
+                closeOfferModal();
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && offerOverlay.classList.contains('active')) {
+                closeOfferModal();
+            }
+        });
+
+        // ── ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ────────────
+        const footerPrivacy = document.getElementById('footerPrivacy');
+        footerPrivacy.addEventListener('click', function() {
+            alert(
+                'Политика конфиденциальности\n\n' +
+                'Мы уважаем вашу конфиденциальность.\n' +
+                '• Персональные данные используются только для связи.\n' +
+                '• Данные не передаются третьим лицам.\n' +
+                '• Вы можете запросить удаление данных в любое время.\n' +
+                '• Контакт: hello@descard.ru'
+            );
+        });
+    </script>
+
+</body>
+</html>
